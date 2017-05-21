@@ -1,9 +1,5 @@
 ﻿using RestService.Domain.Entity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestService.Repository.Repository
 {
@@ -11,8 +7,8 @@ namespace RestService.Repository.Repository
     {
         IEnumerable<T> GetAll();
         T Get(long id);
-        void Insert(T entity);
-        void Update(T entity);
+        T Insert(T entity);
+        T Update(T entity);
         void Delete(T entity);
         void SaveChanges();
     }

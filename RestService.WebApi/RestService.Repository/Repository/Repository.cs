@@ -1,14 +1,24 @@
 ﻿using RestService.Domain.Entity;
+using RestService.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RestService.Repository.Repository
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
+        private DataContext context;
+        private DbSet<T> entities;
+        string errorMessage = string.Empty;
+
+        public Repository(DataContext context)
+        {
+            this.context = context;
+            entities = context.Set<T>();
+        }
 
         public void Delete(T entity)
         {
@@ -17,27 +27,35 @@ namespace RestService.Repository.Repository
 
         public T Get(long id)
         {
-            throw new NotImplementedException();
+            return entities.FirstOrDefault(s => s.Id == id);
+        }
+
+        public T Get(int id)
+        {
+            return entities.FirstOrDefault(s => s.Id == id);
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return entities.AsEnumerable();
         }
 
-        public void Insert(T entity)
+        public T Insert(T entity)
         {
-            throw new NotImplementedException();
+            entities.Add(entity);
+            context.SaveChanges();
+            return entity;
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            context.SaveChanges();
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
-            throw new NotImplementedException();
+            context.SaveChanges();
+            return entity;
         }
     }
 }

@@ -89,7 +89,6 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
@@ -101,6 +100,10 @@
     <ProjectReference Include="..\RestService.Domain\RestService.Domain.csproj">
       <Project>{d9fd2314-c027-493b-b824-6fa14de13e0d}</Project>
       <Name>RestService.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestService.EntityFramework\RestService.EntityFramework.csproj">
+      <Project>{3D715D26-8B5C-4F1D-971F-B180ECBC8BDD}</Project>
+      <Name>RestService.EntityFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

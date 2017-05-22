@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(RestService.WebApi.Startup))]
@@ -13,6 +10,7 @@ namespace RestService.WebApi
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ConfigureAutoFac(app);
         }
     }
 }

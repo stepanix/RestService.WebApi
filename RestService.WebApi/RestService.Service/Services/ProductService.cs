@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using RestService.Domain.Entities;
 using RestService.Repository.Repository.Base;
-using RestService.Service.Services.Base;
 using RestService.Domain.Models;
 using AutoMapper;
 
@@ -14,14 +13,13 @@ namespace RestService.Service.Services
     public class ProductService : IProductService
     {
         private IRepository<Product> productRepository;
-        private IDomainService domainService;
+        
         IMapper mapper;
 
-        public ProductService(IMapper mapper,IRepository<Product> productRepository, IDomainService domainService)
+        public ProductService(IMapper mapper,IRepository<Product> productRepository)
         {
             this.mapper = mapper;
             this.productRepository = productRepository;
-            this.domainService = domainService;
         }
 
         public void DeleteProduct(int id)

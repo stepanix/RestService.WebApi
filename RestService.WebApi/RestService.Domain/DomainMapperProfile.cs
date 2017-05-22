@@ -4,9 +4,9 @@ using RestService.Domain.Models;
 
 namespace RestService.Domain
 {
-    public class DomainMapper : Profile
+    public class DomainMapperProfile : Profile
     {
-        public DomainMapper()
+        public DomainMapperProfile()
         {
             CreateMap<Product, ProductModel>().ReverseMap();
         }

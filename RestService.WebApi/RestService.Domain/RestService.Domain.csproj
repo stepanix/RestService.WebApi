@@ -95,10 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Core\IEntity.cs" />
     <Compile Include="Core\ISoftDelete.cs" />
-    <Compile Include="DomainMapper.cs" />
+    <Compile Include="DomainMapperProfile.cs" />
     <Compile Include="DomainMapperModule.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entity\BaseEntity.cs" />

@@ -2,7 +2,7 @@
 
 namespace RestService.Service.Services.Base
 {
-    public interface IDomainServices
+    public interface IDomainService
     {
         string GetCurrentUserId();
         string GetCurrentUserName();

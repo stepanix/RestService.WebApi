@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestService.Domain.Entities;
-using RestService.Repository.Repository;
+using RestService.Repository.Repository.Base;
 using RestService.Service.Services.Base;
+using RestService.Domain.Models;
+using AutoMapper;
 
 namespace RestService.Service.Services
 {
@@ -13,36 +15,43 @@ namespace RestService.Service.Services
     {
         private IRepository<Product> productRepository;
         private IDomainService domainService;
+        IMapper mapper;
 
-        public ProductService(IRepository<Product> productRepository, IDomainService domainService)
+        public ProductService(IMapper mapper,IRepository<Product> productRepository, IDomainService domainService)
         {
+            this.mapper = mapper;
             this.productRepository = productRepository;
             this.domainService = domainService;
         }
 
         public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            productRepository.Delete(id);
         }
 
-        public Task<Product> GetProductAsync(long id)
+        public async Task<ProductModel> GetProductAsync(int id)
         {
-            throw new NotImplementedException();
+           return mapper.Map<ProductModel>(await productRepository.GetAsync(id));
         }
 
-        public Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<ProductModel>> GetProductsAsync()
         {
-            throw new NotImplementedException();
+            return mapper.Map<IEnumerable<ProductModel>>(await productRepository.GetAllAsync());
         }
 
-        public Task<Product> InsertProductAsync(Product product)
+        public async Task<ProductModel> InsertProductAsync(ProductModel product)
         {
-            throw new NotImplementedException();
+            var newProduct = await productRepository.InsertAsync(mapper.Map<Product>(product));
+            await productRepository.SaveChangesAsync();
+            return mapper.Map<ProductModel>(newProduct);
         }
 
-        public Task<Product> UpdateProductAsync(Product product)
+        public async Task<ProductModel> UpdateProductAsync(ProductModel product)
         {
-            throw new NotImplementedException();
+            var productForUpdate = await productRepository.GetAsync(product.Id);
+            productForUpdate.Description = product.Description;
+            await productRepository.SaveChangesAsync();
+            return mapper.Map<ProductModel>(productForUpdate);
         }
     }
 }

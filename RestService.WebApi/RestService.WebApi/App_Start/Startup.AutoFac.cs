@@ -3,9 +3,9 @@ using Autofac.Integration.WebApi;
 using AutoMapper;
 using Owin;
 using RestService.Domain;
+using RestService.Domain.Repositories;
 using RestService.EntityFramework;
-using RestService.Repository.Repository.Base;
-using RestService.Service.Services;
+using RestService.EntityFramework.Repositories.Base;
 using RestService.WebApi.RequestIdentity;
 using System;
 using System.Reflection;
@@ -40,8 +40,8 @@ namespace RestService.WebApi
                 .InstancePerLifetimeScope();
 
             //Register Generic Repository
-            builder.RegisterGeneric(typeof(Repository<>))
-                       .As(typeof(IRepository<>))
+            builder.RegisterGeneric(typeof(BaseRepository<>))
+                       .As(typeof(IBaseRepository<>))
                        .InstancePerRequest();
 
 

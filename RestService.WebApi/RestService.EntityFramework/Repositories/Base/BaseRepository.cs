@@ -1,21 +1,23 @@
 ﻿using RestService.Domain.Core;
 using RestService.Domain.Entity;
-using RestService.EntityFramework;
+using RestService.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+
+
 using System.Threading.Tasks;
 
-namespace RestService.Repository.Repository.Base
+namespace RestService.EntityFramework.Repositories.Base
 {
-    public class Repository<T> : IRepository<T>,IDisposable where T : BaseEntity
+    public class BaseRepository<T>: IBaseRepository<T>, IDisposable where T : BaseEntity
     {
         private DataContext context;
         private DbSet<T> table;
         string errorMessage = string.Empty;
 
-        public Repository(DataContext context)
+        public BaseRepository(DataContext context)
         {
             this.context = context;
             table = context.Set<T>();
@@ -63,7 +65,7 @@ namespace RestService.Repository.Repository.Base
 
         public T Insert(T entity)
         {
-            table.Add(entity);            
+            table.Add(entity);
             return entity;
         }
 
@@ -74,7 +76,7 @@ namespace RestService.Repository.Repository.Base
 
         public async Task SaveChangesAsync()
         {
-           await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
         public T Update(T entity)

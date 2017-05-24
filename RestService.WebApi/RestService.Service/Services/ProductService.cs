@@ -1,22 +1,21 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using RestService.Domain.Entities;
-using RestService.Repository.Repository.Base;
+
 using RestService.Domain.Models;
 using AutoMapper;
+using RestService.Domain.Repositories;
 
 namespace RestService.Service.Services
 {
     public class ProductService : IProductService
     {
-        private IRepository<Product> productRepository;
+        private IBaseRepository<Product> productRepository;
         
         IMapper mapper;
 
-        public ProductService(IMapper mapper,IRepository<Product> productRepository)
+        public ProductService(IMapper mapper, IBaseRepository<Product> productRepository)
         {
             this.mapper = mapper;
             this.productRepository = productRepository;

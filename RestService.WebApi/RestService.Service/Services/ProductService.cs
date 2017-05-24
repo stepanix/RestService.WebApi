@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using RestService.Domain.Entities;
-
 using RestService.Domain.Models;
 using AutoMapper;
 using RestService.Domain.Repositories;
+using System;
 
 namespace RestService.Service.Services
 {
     public class ProductService : IProductService
     {
-        private IBaseRepository<Product> productRepository;
+        private IProductRepository productRepository;
         
         IMapper mapper;
 
-        public ProductService(IMapper mapper, IBaseRepository<Product> productRepository)
+        public ProductService(IMapper mapper, IProductRepository productRepository)
         {
             this.mapper = mapper;
             this.productRepository = productRepository;
@@ -46,9 +46,12 @@ namespace RestService.Service.Services
         public async Task<ProductModel> UpdateProductAsync(ProductModel product)
         {
             var productForUpdate = await productRepository.GetAsync(product.Id);
+            productForUpdate.ModifiedDate = DateTime.Now;
             productForUpdate.Description = product.Description;
+            
             await productRepository.SaveChangesAsync();
             return mapper.Map<ProductModel>(productForUpdate);
         }
+
     }
 }

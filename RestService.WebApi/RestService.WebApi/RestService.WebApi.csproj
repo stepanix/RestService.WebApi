@@ -247,6 +247,7 @@
     <Compile Include="DtoMapperModule.cs" />
     <Compile Include="DtoMapperProfile.cs" />
     <Compile Include="Dto\Products\Dto\In\ProductDtoIn.cs" />
+    <Compile Include="Dto\Products\Dto\In\ProductDtoUpdateIn.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

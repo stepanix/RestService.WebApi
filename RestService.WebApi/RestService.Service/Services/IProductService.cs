@@ -1,6 +1,4 @@
-﻿using RestService.Domain.Entities;
-using RestService.Domain.Models;
-using System;
+﻿using RestService.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

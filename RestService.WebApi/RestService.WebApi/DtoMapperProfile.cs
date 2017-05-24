@@ -10,6 +10,7 @@ namespace RestService.WebApi
         public DtoMapperProfile()
         {
             CreateMap<ProductModel, ProductDtoIn>().ReverseMap();
+            CreateMap<ProductModel, ProductDtoUpdateIn>().ReverseMap();
         }
     }
 }

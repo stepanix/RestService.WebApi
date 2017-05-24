@@ -11,106 +11,35 @@ using System.Threading.Tasks;
 
 namespace RestService.EntityFramework.Repositories.Base
 {
-    public class BaseRepository<T>: IBaseRepository<T>, IDisposable where T : BaseEntity
+    public abstract class BaseRepository<T>: IBaseRepository<T> where T : BaseEntity
     {
-        private DataContext context;
-        private DbSet<T> table;
-        string errorMessage = string.Empty;
 
         public BaseRepository(DataContext context)
         {
-            this.context = context;
-            table = context.Set<T>();
+            
         }
 
-        public void Delete(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Delete(int id);
 
-        public void Delete(int id)
-        {
-            var entity = table.Local.FirstOrDefault(s => s.Id == id);
-            if (entity == null)
-            {
-                if (entity == null)
-                {
-                    return;
-                }
-            }
-            DeleteSoft(entity);
-        }
+        public abstract T Get(int id);
 
-        private void DeleteSoft(T entity)
-        {
-            if (entity is ISoftDelete)
-            {
-                (entity as ISoftDelete).IsDeleted = true;
-            }
-            else
-            {
-                table.Remove(entity);
-            }
-        }
+        public abstract IEnumerable<T> GetAll();
 
-        public T Get(int id)
-        {
-            return table.FirstOrDefault(s => s.Id == id);
-        }
+        public abstract Task<IEnumerable<T>> GetAllAsync();
 
-        public IEnumerable<T> GetAll()
-        {
-            return table.AsEnumerable();
-        }
+        public abstract Task<T> GetAsync(int id);
 
-        public T Insert(T entity)
-        {
-            table.Add(entity);
-            return entity;
-        }
+        public abstract T Insert(T entity);
 
-        public void SaveChanges()
-        {
-            context.SaveChanges();
-        }
+        public abstract Task<T> InsertAsync(T entity);
 
-        public async Task SaveChangesAsync()
-        {
-            await context.SaveChangesAsync();
-        }
+        public abstract void SaveChanges();
 
-        public T Update(T entity)
-        {
-            context.Entry(entity).State = EntityState.Modified;
-            return entity;
-        }
+        public abstract Task SaveChangesAsync();
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await table.ToListAsync();
-        }
+        public abstract T Update(T entity);
 
-        public async Task<T> GetAsync(int id)
-        {
-            return await table.FirstOrDefaultAsync(s => s.Id == id);
-        }
-
-        public async Task<T> InsertAsync(T entity)
-        {
-            return await Task.FromResult(table.Add(entity));
-        }
-
-        public async Task<T> UpdateAsync(T entity)
-        {
-            context.Entry(entity).State = EntityState.Modified;
-            return await Task.FromResult(entity);
-        }
-
-        public void Dispose()
-        {
-            if (context != null)
-                context.Dispose();
-        }
-
+        public abstract Task<T> UpdateAsync(T entity);
+        
     }
 }

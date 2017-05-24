@@ -1,9 +1,4 @@
 ﻿using RestService.WebApi.Controllers.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 using RestService.WebApi.RequestIdentity;
 using RestService.Service.Services;
 using AutoMapper;
@@ -35,6 +30,19 @@ namespace RestService.WebApi.Controllers
             }
 
             var created = await productService.InsertProductAsync(mapper.Map<ProductModel>(product));
+            return Ok(created);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IHttpActionResult> Udate([FromBody]ProductDtoUpdateIn product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var created = await productService.UpdateProductAsync(mapper.Map<ProductModel>(product));
             return Ok(created);
         }
 

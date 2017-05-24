@@ -110,6 +110,7 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Repositories\IProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

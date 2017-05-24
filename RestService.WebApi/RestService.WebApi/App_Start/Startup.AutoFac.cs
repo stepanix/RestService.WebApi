@@ -40,12 +40,16 @@ namespace RestService.WebApi
                 .InstancePerLifetimeScope();
 
             //Register Generic Repository
-            builder.RegisterGeneric(typeof(BaseRepository<>))
+            builder.RegisterGeneric(typeof(ORMBaseRepository<,>))
                        .As(typeof(IBaseRepository<>))
                        .InstancePerRequest();
 
+            //Scan Any Repository For Registration
+            builder.RegisterAssemblyTypes(assemblies)
+               .Where(t => t.Name.EndsWith("Repository"))
+               .AsImplementedInterfaces();
 
-            //Register Product Service
+            //Scan Any Service For Registration
             builder.RegisterAssemblyTypes(assemblies)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces();

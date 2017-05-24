@@ -3,7 +3,9 @@ using Autofac.Integration.WebApi;
 using AutoMapper;
 using Owin;
 using RestService.Domain;
-
+using RestService.EntityFramework;
+using RestService.Repository.Repository.Base;
+using RestService.Service.Services;
 using RestService.WebApi.RequestIdentity;
 using System;
 using System.Reflection;
@@ -37,16 +39,19 @@ namespace RestService.WebApi
                 .As<IMapper>()
                 .InstancePerLifetimeScope();
 
-            // Scan an assembly for components
-            builder.RegisterAssemblyTypes(assemblies)
-                   .Where(t => t.Name.EndsWith("Repository"))
-                   .AsImplementedInterfaces();
-                   
+            //Register Generic Repository
+            builder.RegisterGeneric(typeof(Repository<>))
+                       .As(typeof(IRepository<>))
+                       .InstancePerRequest();
 
-            // Scan an assembly for components
+
+            //Register Product Service
             builder.RegisterAssemblyTypes(assemblies)
-                   .Where(t => t.Name.EndsWith("Service"))
-                   .AsImplementedInterfaces();
+               .Where(t => t.Name.EndsWith("Service"))
+               .AsImplementedInterfaces();
+            //builder.RegisterType<ProductService>().As<IProductService>().InstancePerRequest();
+            builder.RegisterType<DataContext>().InstancePerRequest();
+
 
             // Register method interceptor module
             //builder.RegisterModule(new InterceptModule());

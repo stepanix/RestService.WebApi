@@ -93,10 +93,6 @@
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="DataContextExecutionStrategy.cs" />
-    <Compile Include="Migrations\201704281325282_Update.cs" />
-    <Compile Include="Migrations\201704281325282_Update.Designer.cs">
-      <DependentUpon>201704281325282_Update.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -109,11 +105,6 @@
       <Project>{D9FD2314-C027-493B-B824-6FA14DE13E0D}</Project>
       <Name>RestService.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704281325282_Update.resx">
-      <DependentUpon>201704281325282_Update.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

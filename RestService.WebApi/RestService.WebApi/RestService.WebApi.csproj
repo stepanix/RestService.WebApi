@@ -332,6 +332,10 @@
       <Project>{D9FD2314-C027-493B-B824-6FA14DE13E0D}</Project>
       <Name>RestService.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestService.EntityFramework\RestService.EntityFramework.csproj">
+      <Project>{3D715D26-8B5C-4F1D-971F-B180ECBC8BDD}</Project>
+      <Name>RestService.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RestService.Repository\RestService.Repository.csproj">
       <Project>{FC2A3C3A-5AE2-4388-B4F5-A645E007CDAB}</Project>
       <Name>RestService.Repository</Name>

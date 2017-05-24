@@ -5,9 +5,16 @@ using System;
 
 namespace RestService.Domain.Entity
 {
-    public abstract class BaseEntity : Entity<int>, ISoftDelete
+    public class BaseEntity : Entity<int>, ISoftDelete
     {
-        public DateTime AddedDate { get; set; }
+        public BaseEntity()
+        {
+            AddedDate = DateTime.UtcNow;
+            IsActive = true;
+            IsDeleted = false;
+        }
+
+        public DateTime? AddedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }

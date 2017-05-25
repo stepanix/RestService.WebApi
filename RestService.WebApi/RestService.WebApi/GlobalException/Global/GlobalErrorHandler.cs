@@ -1,5 +1,7 @@
 ﻿
 using RestService.WebApi.Controllers.Base;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -13,12 +15,35 @@ namespace RestService.WebApi.GlobalException.Global
     {
         public override void Handle(ExceptionHandlerContext context)
         {
-            context.Result = new TextPlainErrorResult
+            var exceptionType = context.Exception.GetType();
+
+            if (exceptionType == typeof(ValidationException))
             {
-                Request = context.ExceptionContext.Request,
-                Content = "Oops! Sorry! Something went wrong." +
+                var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(context.Exception.Message),
+                    ReasonPhrase = "Sorry, a validation error occurred",
+                };
+                throw new HttpResponseException(resp);
+            }
+            else if (exceptionType == typeof(UnauthorizedAccessException))
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                {
+                    Content = new StringContent(context.Exception.Message),
+                    ReasonPhrase = "Sorry, you are not authorised to call this end point",
+                };
+                throw new HttpResponseException(resp);
+            }
+            else
+            {
+                context.Result = new TextPlainErrorResult
+                {
+                    Request = context.ExceptionContext.Request,
+                    Content = "Oops! Sorry! Something went wrong." +
                           "Please contact administrator."
-            };
+                };
+            }
         }
 
         private class TextPlainErrorResult : IHttpActionResult

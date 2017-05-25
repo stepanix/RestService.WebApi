@@ -4,6 +4,8 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
+using System.Web.Http.ExceptionHandling;
+using RestService.WebApi.GlobalException.Global;
 
 namespace RestService.WebApi
 {
@@ -35,6 +37,8 @@ namespace RestService.WebApi
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalErrorHandler());
 
             //Wire up the global exception handler and logger
             //config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());

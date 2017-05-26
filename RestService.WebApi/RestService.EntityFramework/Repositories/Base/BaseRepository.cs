@@ -1,17 +1,14 @@
 ﻿using RestService.Domain.Core;
-using RestService.Domain.Entity;
-using RestService.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 
+using RestService.Domain.Entity.Base;
+using RestService.Domain.Repositories;
+using System.Collections.Generic;
 
 using System.Threading.Tasks;
 
 namespace RestService.EntityFramework.Repositories.Base
 {
-    public abstract class BaseRepository<T>: IBaseRepository<T> where T : BaseEntity
+    public abstract class BaseRepository<T>: IBaseRepository<T> where T : BaseEntity<int>
     {
 
         public BaseRepository(DataContext context)

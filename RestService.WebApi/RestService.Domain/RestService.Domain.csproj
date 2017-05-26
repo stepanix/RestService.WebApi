@@ -100,8 +100,7 @@
     <Compile Include="DomainMapperProfile.cs" />
     <Compile Include="DomainMapperModule.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entity\BaseEntity.cs" />
-    <Compile Include="Entity\Base\Entity.cs" />
+    <Compile Include="Entity\Base\BaseEntity.cs" />
     <Compile Include="Identity\Role.cs" />
     <Compile Include="Identity\User.cs" />
     <Compile Include="Identity\UserClaim.cs" />

@@ -1,7 +1,6 @@
 ﻿
 
 using RestService.Domain.Core;
-using RestService.Domain.Entity;
 using System;
 using System.Data.Entity;
 using System.Collections.Generic;
@@ -9,11 +8,12 @@ using System.Threading.Tasks;
 using RestService.Domain.Repositories;
 
 using System.Linq;
+using RestService.Domain.Entity.Base;
 
 namespace RestService.EntityFramework.Repositories.Base
 {
     public class ORMBaseRepository<T, TPrimaryKey> : BaseRepository<T>, IBaseRepository<T>, IDisposable
-      where T : BaseEntity
+      where T : BaseEntity<int>
     {
         private DataContext context;
         private DbSet<T> table;

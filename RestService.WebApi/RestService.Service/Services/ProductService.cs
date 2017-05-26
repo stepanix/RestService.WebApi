@@ -37,6 +37,7 @@ namespace RestService.Service.Services
 
         public async Task<ProductModel> InsertProductAsync(ProductModel product)
         {
+            product.AddedDate = DateTime.Now;
             var newProduct = await productRepository.InsertAsync(mapper.Map<Product>(product));
             await productRepository.SaveChangesAsync();
             return mapper.Map<ProductModel>(newProduct);

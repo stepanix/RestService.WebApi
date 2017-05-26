@@ -1,13 +1,11 @@
 ﻿using RestService.Domain.Entity;
-using System;
+using RestService.Domain.Entity.Base;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RestService.Domain.Repositories
 {
-    public interface IBaseRepository<T> where T : BaseEntity
+    public interface IBaseRepository<T> where T : BaseEntity<int>
     {
         IEnumerable<T> GetAll();
         Task<IEnumerable<T>> GetAllAsync();

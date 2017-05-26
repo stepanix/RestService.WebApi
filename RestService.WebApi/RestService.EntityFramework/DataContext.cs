@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using RestService.Domain.Core;
+using Microsoft.AspNet.Identity.EntityFramework;
 using RestService.Domain.Entities;
 using RestService.Domain.Identity;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using EntityFramework.Filters;
-using RestService.Domain.Core;
+
 
 namespace RestService.EntityFramework
 {
@@ -28,7 +29,7 @@ namespace RestService.EntityFramework
             //Register filter interceptor
             DbInterception.Add(new FilterInterceptor());
 
-            modelBuilder.Conventions.Add(FilterConvention.Create<ISoftDelete, bool>("IsDeleted", (e, isDeleted) => e.IsDeleted == false));
+            modelBuilder.Conventions.Add(FilterConvention.Create<ISoftDelete, bool>("IsDeleted", (e, IsDeleted) => e.IsDeleted == false));
 
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;

@@ -35,7 +35,7 @@ namespace RestService.WebApi.Controllers
 
         [HttpPut]
         [Route("")]
-        public async Task<IHttpActionResult> Udate([FromBody]ProductDtoUpdateIn product)
+        public async Task<IHttpActionResult> Update([FromBody]ProductDtoUpdateIn product)
         {
             if (!ModelState.IsValid)
             {
@@ -43,6 +43,22 @@ namespace RestService.WebApi.Controllers
             }
 
             var created = await productService.UpdateProductAsync(mapper.Map<ProductModel>(product));
+            return Ok(created);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IHttpActionResult> Read(int id)
+        {
+            var created = await productService.GetProductAsync(id);
+            return Ok(created);
+        }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IHttpActionResult> ReadAll()
+        {
+            var created = await productService.GetProductsAsync();
             return Ok(created);
         }
 

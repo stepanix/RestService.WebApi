@@ -11,8 +11,7 @@ namespace RestService.Service.Services
 {
     public class ProductService : IProductService
     {
-        private IProductRepository productRepository;
-        
+        IProductRepository productRepository;
         IMapper mapper;
 
         public ProductService(IMapper mapper, IProductRepository productRepository)
